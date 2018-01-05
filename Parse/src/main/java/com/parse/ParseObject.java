@@ -40,6 +40,8 @@ import bolts.Continuation;
 import bolts.Task;
 import bolts.TaskCompletionSource;
 
+import static com.parse.TaskQueue.waitFor;
+
 /**
  * The {@code ParseObject} is a local representation of data that can be saved and retrieved from
  * the Parse cloud.
@@ -1596,7 +1598,8 @@ public class ParseObject implements Parcelable {
        * removed after save is called, but before the unresolved user gets resolved? It
        * won't get saved.
        */
-      task = deepSaveAsync(estimatedData, sessionToken);
+//      task = deepSaveAsync(estimatedData, sessionToken);
+      task = fakeDeepSaveAsync(estimatedData, sessionToken);
     }
 
     return task.onSuccessTask(
@@ -1626,6 +1629,11 @@ public class ParseObject implements Parcelable {
       }
     });
   }
+
+  private static Task<Void> fakeDeepSaveAsync(final Object object, final String sessionToken) {
+    return null;
+  }
+
 
   // Currently only used by ParsePinningEventuallyQueue for saveEventually due to the limitation in
   // ParseCommandCache that it can only return JSONObject result.
