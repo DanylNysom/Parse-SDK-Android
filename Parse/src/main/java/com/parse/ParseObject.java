@@ -1631,7 +1631,7 @@ public class ParseObject implements Parcelable {
   }
 
   private static Task<Void> fakeDeepSaveAsync(final Object object, final String sessionToken) {
-    return null;
+    return Task.delay(0);
   }
 
 
